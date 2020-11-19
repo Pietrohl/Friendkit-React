@@ -1,8 +1,10 @@
+"use strict";
 /*! questions.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Questions js file
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict"; //Highlight current menu item
 

@@ -1,24 +1,34 @@
+"use strict";
 /*! friends.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Friends page js file
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict";
 
   if ($('#friends-page').length) {
-    //Hide loader
+    //Enable full text search function
+    var enableSearch = function enableSearch() {
+      $('.friend-card').addClass('textFilter-target');
+      $('.friend-card').find(' .friend-info h3,  .friend-info p').addClass('textFilter-match');
+    }; //Call loader
+
+
+    var callLoader = function callLoader(t) {
+      $('.subloader').addClass('is-active');
+      setTimeout(function () {
+        $('.subloader').removeClass('is-active');
+      }, t);
+    }; //Hide loader
+
+
     $('.subloader').removeClass('is-active'); //Init combo box
 
     initComboBox(); //Init image combo box
 
-    initImageComboBox(); //Enable full text search function
-
-    function enableSearch() {
-      $('.friend-card').addClass('textFilter-target');
-      $('.friend-card').find(' .friend-info h3,  .friend-info p').addClass('textFilter-match');
-    }
-
+    initImageComboBox();
     enableSearch(); //Init search filter
 
     initTextFilter(); //Friend menu tabs
@@ -36,13 +46,6 @@ $(document).ready(function () {
 
     $('.star-friend').on('click', function () {
       $(this).toggleClass('is-active');
-    }); //Call loader
-
-    function callLoader(t) {
-      $('.subloader').addClass('is-active');
-      setTimeout(function () {
-        $('.subloader').removeClass('is-active');
-      }, t);
-    }
+    });
   }
 });

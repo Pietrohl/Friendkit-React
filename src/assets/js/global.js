@@ -340,19 +340,19 @@ function initEmojiPicker() {
     wrapper.attr('id', 'post-comment-wrapper-' + id);
     textarea.attr('id', 'post-comment-textarea-' + id);
     action.attr('id', 'post-comment-button-' + id);
-    const container = document.getElementById('post-comment-wrapper-' + id);
-    const messageInput = document.getElementById('post-comment-textarea-' + id);
-    const button = document.getElementById('post-comment-button-' + id);
-    const picker = new EmojiButton({
+    var container = document.getElementById('post-comment-wrapper-' + id);
+    var messageInput = document.getElementById('post-comment-textarea-' + id);
+    var button = document.getElementById('post-comment-button-' + id);
+    var picker = new EmojiButton({
       position: 'top-end',
       rootElement: container,
       autoHide: false
     });
-    picker.on('emoji', emoji => {
+    picker.on('emoji', function (emoji) {
       messageInput.value += emoji;
       messageInput.dispatchEvent(new Event('keyup'));
     });
-    button.addEventListener('click', () => {
+    button.addEventListener('click', function () {
       picker.pickerVisible ? picker.hidePicker() : picker.showPicker(button);
     });
   });
@@ -369,19 +369,19 @@ function initLightboxEmojis() {
     wrapper.attr('id', 'lightbox-post-comment-wrapper-' + id);
     textarea.attr('id', 'lightbox-post-comment-textarea-' + id);
     action.attr('id', 'lightbox-post-comment-button-' + id);
-    const container = document.getElementById('lightbox-post-comment-wrapper-' + id);
-    const messageInput = document.getElementById('lightbox-post-comment-textarea-' + id);
-    const button = document.getElementById('lightbox-post-comment-button-' + id);
-    const picker = new EmojiButton({
+    var container = document.getElementById('lightbox-post-comment-wrapper-' + id);
+    var messageInput = document.getElementById('lightbox-post-comment-textarea-' + id);
+    var button = document.getElementById('lightbox-post-comment-button-' + id);
+    var picker = new EmojiButton({
       position: 'top-end',
       rootElement: container,
       autoHide: false
     });
-    picker.on('emoji', emoji => {
+    picker.on('emoji', function (emoji) {
       messageInput.value += emoji;
       messageInput.dispatchEvent(new Event('keyup'));
     });
-    button.addEventListener('click', () => {
+    button.addEventListener('click', function () {
       picker.pickerVisible ? picker.hidePicker() : picker.showPicker(button);
     });
   });
@@ -610,9 +610,7 @@ function initStackedComboBox() {
     var itemName = $(this).find('.item-name').text();
     var itemRef = $(this).attr('data-skill');
     var initialText = 'Select one or more skills';
-    var skillTemplate = `
-            <img id="${itemRef}" class="is-stacked" src="${itemPic}">
-        `;
+    var skillTemplate = "\n            <img id=\"" + itemRef + "\" class=\"is-stacked\" src=\"" + itemPic + "\">\n        ";
 
     if (!$(target).is('.box-dropdown li, body') && !$(target).parents().is('.box-dropdown')) {
       $('.box-dropdown').removeClass('is-active');
@@ -689,7 +687,9 @@ function initTextFilter() {
       $('.textFilter-target').hide().removeClass('is-match').addClass('is-not-match').filter(function () {
         var matchText = $(this).find('.textFilter-match').text().toLowerCase();
 
-        for (var i = 0; i < patterns.length; i++) if (matchText.indexOf(patterns[i]) === -1) return false;
+        for (var i = 0; i < patterns.length; i++) {
+          if (matchText.indexOf(patterns[i]) === -1) return false;
+        }
 
         return true;
       }).show().removeClass('is-not-match').addClass('is-match'); //Friends

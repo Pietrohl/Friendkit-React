@@ -1,13 +1,15 @@
+"use strict";
 /*! landing.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Landing page functions
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict";
 
   if ($('.landing-wrapper').length) {
-    function scroll_if_anchor(href) {
+    var scroll_if_anchor = function scroll_if_anchor(href) {
       href = typeof href == "string" ? href : $(this).attr("href"); // You could easily calculate this dynamically if you prefer
 
       var fromTop = 50; // If our Href points to a valid, non-empty anchor, and is on the same page (e.g. #foo)
@@ -28,7 +30,7 @@ $(document).ready(function () {
           }
         }
       }
-    } // When our page loads, check to see if it contains and anchor
+    }; // When our page loads, check to see if it contains and anchor
 
 
     scroll_if_anchor(window.location.hash); // Intercept all anchor clicks

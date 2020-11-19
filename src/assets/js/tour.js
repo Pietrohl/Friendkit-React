@@ -7,7 +7,7 @@ App Tour
 
 var tour = {
   id: "hello-friendkit",
-  onEnd: function () {
+  onEnd: function onEnd() {
     $('#end-tour-modal').addClass('is-active');
   },
   steps: [{
@@ -34,7 +34,7 @@ var tour = {
     placement: "top",
     xOffset: "center",
     multipage: true,
-    onNext: function () {
+    onNext: function onNext() {
       window.location = "feed.html";
     }
   }, {
@@ -51,7 +51,7 @@ var tour = {
     placement: "bottom",
     fixedElement: true,
     xOffset: -5,
-    onNext: function () {
+    onNext: function onNext() {
       setTimeout(function () {
         $('.is-new-content').addClass('hopscotch-highlight');
         $('.app-overlay').addClass('is-active');
@@ -63,7 +63,7 @@ var tour = {
     target: document.querySelector("#compose-card"),
     placement: "bottom",
     xOffset: "center",
-    onNext: function () {
+    onNext: function onNext() {
       $('.is-new-content').removeClass('hopscotch-highlight');
       $('.app-overlay').removeClass('is-active');
       setTimeout(function () {
@@ -77,7 +77,7 @@ var tour = {
     target: document.querySelector("#feed-post-1"),
     placement: "top",
     xOffset: "center",
-    onNext: function () {
+    onNext: function onNext() {
       $('#feed-post-1').removeClass('hopscotch-highlight');
       $('.app-overlay').removeClass('is-active');
       setTimeout(function () {
@@ -91,7 +91,7 @@ var tour = {
     target: document.querySelector("#latest-activity-1"),
     placement: "top",
     xOffset: "center",
-    onNext: function () {
+    onNext: function onNext() {
       $('#latest-activity-1').removeClass('hopscotch-highlight');
       $('.app-overlay').removeClass('is-active');
     }
@@ -103,7 +103,7 @@ var tour = {
     xOffset: "5",
     fixedElement: true,
     multipage: true,
-    onNext: function () {
+    onNext: function onNext() {
       window.location = "profile-main.html";
     }
   }, {

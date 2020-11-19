@@ -72,7 +72,7 @@ $(document).ready(function () {
 
 var toasts = {};
 toasts.service = {
-  info: function (title, icon, message, position, t) {
+  info: function info(title, icon, message, position, t) {
     iziToast.show({
       class: 'toast',
       icon: icon,
@@ -90,7 +90,7 @@ toasts.service = {
       zindex: 99999
     });
   },
-  success: function (title, icon, message, position, t) {
+  success: function success(title, icon, message, position, t) {
     iziToast.show({
       class: 'toast',
       icon: icon,
@@ -108,7 +108,7 @@ toasts.service = {
       zindex: 99999
     });
   },
-  error: function (title, icon, message, position, t) {
+  error: function error(title, icon, message, position, t) {
     iziToast.show({
       class: 'toast',
       icon: icon,

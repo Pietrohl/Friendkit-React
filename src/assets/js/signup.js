@@ -1,8 +1,10 @@
+"use strict";
 /*! signup.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Signup Process JS
 ========================================================================== */
+
 Dropzone.autoDiscover = false;
 $(document).ready(function () {
   "use strict";
@@ -46,7 +48,7 @@ $(document).ready(function () {
       // MB
       acceptedFiles: ".jpeg,.jpg,.png",
       clickable: ".upload-button",
-      init: function () {
+      init: function init() {
         this.on("error", function (file, message) {
           console.log(message);
           this.removeFile(file);
@@ -58,7 +60,7 @@ $(document).ready(function () {
 
         ;
       },
-      transformFile: function (file, done) {
+      transformFile: function transformFile(file, done) {
         $('#crop-modal').addClass('is-active'); //pictures = [];
         // Create the image editor overlay
 

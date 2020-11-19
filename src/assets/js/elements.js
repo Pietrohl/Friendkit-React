@@ -1,13 +1,15 @@
+"use strict";
 /*! elements.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Elements page js file
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict";
 
   if ($('#elements-page').length) {
-    function scroll_if_anchor(href) {
+    var scroll_if_anchor = function scroll_if_anchor(href) {
       href = typeof href == "string" ? href : $(this).attr("href"); // You could easily calculate this dynamically if you prefer
 
       var fromTop = 50; // If our Href points to a valid, non-empty anchor, and is on the same page (e.g. #foo)
@@ -28,7 +30,53 @@ $(document).ready(function () {
           }
         }
       }
-    } // When our page loads, check to see if it contains and anchor
+    }; // When our page loads, check to see if it contains and anchor
+
+
+    var albumsHelp = function albumsHelp() {
+      $('#albums-help-modal .next-modal').one('click', function () {
+        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+        $(this).text('got it').off();
+        endAlbumHelp();
+      });
+    };
+
+    var endAlbumHelp = function endAlbumHelp() {
+      $('#albums-help-modal .next-modal').on('click', function () {
+        var $this = $(this);
+        var albumsModal = $this.attr('data-modal');
+        $this.closest('.modal').removeClass('is-active');
+        $('#' + albumsModal).addClass('is-active');
+        setTimeout(function () {
+          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+          $this.text('Next').off();
+          albumsHelp();
+        }, 800);
+      });
+    }; //Help modal before live video
+
+
+    var videosHelp = function videosHelp() {
+      $('#videos-help-modal .next-modal').one('click', function () {
+        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+        $(this).text('got it').off();
+        endVideoHelp();
+      });
+    };
+
+    var endVideoHelp = function endVideoHelp() {
+      $('#videos-help-modal .next-modal').on('click', function () {
+        var $this = $(this);
+        var videosModal = $(this).attr('data-modal');
+        $this.closest('.modal').removeClass('is-active');
+        $('#' + videosModal).addClass('is-active');
+        setTimeout(function () {
+          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+          $this.text('Next').off();
+          videosHelp();
+        }, 800);
+      });
+    }; //Lightbox
 
 
     scroll_if_anchor(window.location.hash); // Intercept all anchor clicks
@@ -46,55 +94,7 @@ $(document).ready(function () {
     }); //Help modal before albums management
 
     albumsHelp();
-
-    function albumsHelp() {
-      $('#albums-help-modal .next-modal').one('click', function () {
-        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-        $(this).text('got it').off();
-        endAlbumHelp();
-      });
-    }
-
-    function endAlbumHelp() {
-      $('#albums-help-modal .next-modal').on('click', function () {
-        var $this = $(this);
-        var albumsModal = $this.attr('data-modal');
-        $this.closest('.modal').removeClass('is-active');
-        $('#' + albumsModal).addClass('is-active');
-        setTimeout(function () {
-          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-          $this.text('Next').off();
-          albumsHelp();
-        }, 800);
-      });
-    } //Help modal before live video
-
-
     videosHelp();
-
-    function videosHelp() {
-      $('#videos-help-modal .next-modal').one('click', function () {
-        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-        $(this).text('got it').off();
-        endVideoHelp();
-      });
-    }
-
-    function endVideoHelp() {
-      $('#videos-help-modal .next-modal').on('click', function () {
-        var $this = $(this);
-        var videosModal = $(this).attr('data-modal');
-        $this.closest('.modal').removeClass('is-active');
-        $('#' + videosModal).addClass('is-active');
-        setTimeout(function () {
-          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-          $this.text('Next').off();
-          videosHelp();
-        }, 800);
-      });
-    } //Lightbox
-
-
     $('.lightbox-trigger, .close-lightbox').on('click', function () {
       $('.custom-profile-lightbox').toggleClass('is-active');
       setTimeout(function () {
@@ -118,7 +118,7 @@ $(document).ready(function () {
         idleTime: false,
         gutter: 0,
         // Customize caption area
-        caption: function (instance) {
+        caption: function caption(instance) {
           return '<h3>home</h3><p>interiors, exteriors, and the humans that inhabit them.</p><p><a href="https://unsplash.com/collections/curated/162" target="_blank">unsplash.com</a></p>';
         }
       });
@@ -138,7 +138,7 @@ $(document).ready(function () {
         transitionEffect: "slide",
         transitionDuration: 500,
         baseTpl: '<div class="fancybox-container" role="dialog">' + '<div class="quick-view-content">' + '<div class="quick-view-carousel">' + '<div class="fancybox-stage"></div>' + "</div>" + '<div class="quick-view-aside"></div>' + '<button data-fancybox-close class="quick-view-close">X</button>' + "</div>" + "</div>",
-        onInit: function (instance) {
+        onInit: function onInit(instance) {
           /*#1 Create bullet navigation links
           =================================*/
           var bullets = '<ul class="quick-view-bullets">';
@@ -162,7 +162,7 @@ $(document).ready(function () {
           instance.$refs.container.find(".quick-view-aside").append( // In this example, this element contains the form
           $("#" + form_id).clone(true).removeClass("is-hidden"));
         },
-        beforeShow: function (instance) {
+        beforeShow: function beforeShow(instance) {
           /* Mark current bullet navigation link as active*/
           instance.$refs.container.find(".quick-view-bullets").children().removeClass("active").eq(instance.currIndex).addClass("active");
         }
@@ -187,7 +187,7 @@ $(document).ready(function () {
             animationEffect: "material",
             modal: true,
             baseTpl: '<div class="fancybox-container fc-container" role="dialog" tabindex="-1">' + '<div class="fancybox-bg"></div>' + '<div class="fancybox-inner">' + '<div class="fancybox-stage"></div>' + "</div>" + "</div>",
-            afterClose: function (instance, current, e) {
+            afterClose: function afterClose(instance, current, e) {
               var button = e ? e.target || e.currentTarget : null;
               var value = button ? $(button).data("value") : 0;
               opts.callback(value);
@@ -205,7 +205,7 @@ $(document).ready(function () {
           message: "Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running",
           okButton: "Agree",
           noButton: "Disagree",
-          callback: function (value) {
+          callback: function callback(value) {
             if (value) {
               $("#test_confirm_rez").html("Let's do this!");
             } else {
@@ -220,7 +220,7 @@ $(document).ready(function () {
       // ============================
 
       $.fn.fancyMorph = function (opts) {
-        var Morphing = function ($btn, opts) {
+        var Morphing = function Morphing($btn, opts) {
           var self = this;
           self.opts = $.extend({
             animationEffect: false,
@@ -229,7 +229,7 @@ $(document).ready(function () {
             smallBtn: false,
             touch: false,
             baseClass: "fancybox-morphing",
-            afterClose: function () {
+            afterClose: function afterClose() {
               self.close();
             }
           }, opts);

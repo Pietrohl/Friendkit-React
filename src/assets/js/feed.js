@@ -1,13 +1,67 @@
+"use strict";
 /*! feed.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Feed page js file
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict";
 
   if ($('#activity-feed').length) {
+    var albumsHelp = function albumsHelp() {
+      $('#albums-help-modal .next-modal').one('click', function () {
+        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+        $(this).text('got it').off();
+        endAlbumHelp();
+      });
+    };
+
+    var endAlbumHelp = function endAlbumHelp() {
+      $('#albums-help-modal .next-modal').on('click', function () {
+        var $this = $(this);
+        var albumsModal = $this.attr('data-modal');
+        $this.closest('.modal').removeClass('is-active');
+        $('#' + albumsModal).addClass('is-active');
+        setTimeout(function () {
+          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+          $this.text('Next').off();
+          albumsHelp();
+        }, 800);
+      });
+    }; //Toggle tag friends input in album modal
+
+
+    var videosHelp = function videosHelp() {
+      $('#videos-help-modal .next-modal').one('click', function () {
+        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+        $(this).text('got it').off();
+        endVideoHelp();
+      });
+    };
+
+    var endVideoHelp = function endVideoHelp() {
+      $('#videos-help-modal .next-modal').on('click', function () {
+        var $this = $(this);
+        var videosModal = $(this).attr('data-modal');
+        $this.closest('.modal').removeClass('is-active');
+
+        if (window.matchMedia("(orientation: portrait)").matches) {
+          $('#no-stream-modal').addClass('is-active');
+        } else {
+          $('#' + videosModal).addClass('is-active');
+        }
+
+        setTimeout(function () {
+          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
+          $this.text('Next').off();
+          videosHelp();
+        }, 800);
+      });
+    }; //Add a recommended page to favorites
     //Feed v1 left menu
+
+
     if ($('.feed-menu-v1').length) {
       $('.feed-menu-v1 .main-menu li.is-active').find('.submenu').slideDown();
       $('.feed-menu-v1 .main-menu li').on('click', function () {
@@ -138,17 +192,7 @@ $(document).ready(function () {
         if ($('#' + selectedRef).length) {
           return false;
         } else {
-          html = `
-                        <div id="${selectedRef}" class="selected-friend-block">
-                            <div class="image-wrapper">
-                                <img class="friend-avatar" src="${selectedAvatar}" alt="">
-                                <div class="checked-badge">
-                                    ${checkIcon}
-                                </div>
-                            </div>
-                            <div class="friend-name">${selectedFriend}</div>
-                        </div>
-                    `;
+          html = "\n                        <div id=\"" + selectedRef + "\" class=\"selected-friend-block\">\n                            <div class=\"image-wrapper\">\n                                <img class=\"friend-avatar\" src=\"" + selectedAvatar + "\" alt=\"\">\n                                <div class=\"checked-badge\">\n                                    " + checkIcon + "\n                                </div>\n                            </div>\n                            <div class=\"friend-name\">" + selectedFriend + "</div>\n                        </div>\n                    ";
           $('#selected-list').append(html);
           var selectedCount = $('#selected-list .selected-friend-block').length;
           $('#selected-friends-count').html(selectedCount);
@@ -162,30 +206,6 @@ $(document).ready(function () {
     }); //Help modal before albums management
 
     albumsHelp();
-
-    function albumsHelp() {
-      $('#albums-help-modal .next-modal').one('click', function () {
-        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-        $(this).text('got it').off();
-        endAlbumHelp();
-      });
-    }
-
-    function endAlbumHelp() {
-      $('#albums-help-modal .next-modal').on('click', function () {
-        var $this = $(this);
-        var albumsModal = $this.attr('data-modal');
-        $this.closest('.modal').removeClass('is-active');
-        $('#' + albumsModal).addClass('is-active');
-        setTimeout(function () {
-          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-          $this.text('Next').off();
-          albumsHelp();
-        }, 800);
-      });
-    } //Toggle tag friends input in album modal
-
-
     $('#tagged-in-album button').on('click', function () {
       $(this).addClass('is-hidden');
       $(this).closest('.tagged-in-album').find('.field, p').toggleClass('is-hidden');
@@ -205,47 +225,10 @@ $(document).ready(function () {
     }); //Help modal before live video
 
     videosHelp();
-
-    function videosHelp() {
-      $('#videos-help-modal .next-modal').one('click', function () {
-        $(this).closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-        $(this).text('got it').off();
-        endVideoHelp();
-      });
-    }
-
-    function endVideoHelp() {
-      $('#videos-help-modal .next-modal').on('click', function () {
-        var $this = $(this);
-        var videosModal = $(this).attr('data-modal');
-        $this.closest('.modal').removeClass('is-active');
-
-        if (window.matchMedia("(orientation: portrait)").matches) {
-          $('#no-stream-modal').addClass('is-active');
-        } else {
-          $('#' + videosModal).addClass('is-active');
-        }
-
-        setTimeout(function () {
-          $this.closest('.card-body').find('.content-block, .dot').toggleClass('is-active');
-          $this.text('Next').off();
-          videosHelp();
-        }, 800);
-      });
-    } //Add a recommended page to favorites
-
-
     $('.add-transition').on('click', function () {
       var $this = $(this);
       var itemName = $this.closest('.transition-block').find('.page-meta span:first-child').text();
-      var successIndicator = `
-                <div class="checkmark-wrapper">
-                    <svg class="checkmark is-xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                    </svg>
-                </div>
-            `;
+      var successIndicator = "\n                <div class=\"checkmark-wrapper\">\n                    <svg class=\"checkmark is-xs\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 52 52\">\n                        <circle class=\"checkmark__circle\" cx=\"26\" cy=\"26\" r=\"25\" fill=\"none\"/>\n                        <path class=\"checkmark__check\" fill=\"none\" d=\"M14.1 27.2l7.1 7.2 16.7-16.8\"/>\n                    </svg>\n                </div>\n            ";
       $(this).addClass('is-hidden');
       $(this).closest('.transition-block').append(successIndicator); //Show a success toast
 

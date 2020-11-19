@@ -5,21 +5,36 @@ Stories functions
 ========================================================================== */
 "use strict";
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
 function initAutoTag() {
   $('.demo option').remove();
   $.ajax({
     url: 'assets/data/api/users/users.json',
     async: true,
     dataType: 'json',
-    success: function (data) {
+    success: function success(data) {
       for (var i = 0; i < data.length; i++) {
-        var template = `
-                    <option value="${data[i].user_id}">@${data[i].first_name} ${data[i].last_name}</option>
-                `;
+        var template = "\n                    <option value=\"" + data[i].user_id + "\">@" + data[i].first_name + " " + data[i].last_name + "</option>\n                ";
         $('.demo').append(template);
 
         if (i < data.length - 1) {
-          $('.demo').tokenize2({
+          var _$$tokenize;
+
+          $('.demo').tokenize2((_$$tokenize = {
             // max number of tags
             tokensMaxItems: 0,
             // allow you to create custom tokens
@@ -37,25 +52,8 @@ function initAutoTag() {
             delimiter: ',',
             // display no results message
             displayNoResultsMessage: false,
-            noResultsMessageText: 'No results mached "%s"',
-            // custom delimiter
-            delimiter: ',',
-            // data source
-            dataSource: 'select',
-            // waiting time between each search
-            debounce: 0,
-            // custom placeholder text
-            placeholder: '@',
-            // enable sortable
-            // requires jQuery UI
-            sortable: false,
-            // tabIndex
-            tabIndex: 0,
-            // allows empty values
-            allowEmptyValues: false,
-            // z-inde
-            zIndexMargin: 500
-          });
+            noResultsMessageText: 'No results mached "%s"'
+          }, _defineProperty(_$$tokenize, "delimiter", ','), _defineProperty(_$$tokenize, "dataSource", 'select'), _defineProperty(_$$tokenize, "debounce", 0), _defineProperty(_$$tokenize, "placeholder", '@'), _defineProperty(_$$tokenize, "sortable", false), _defineProperty(_$$tokenize, "tabIndex", 0), _defineProperty(_$$tokenize, "allowEmptyValues", false), _defineProperty(_$$tokenize, "zIndexMargin", 500), _$$tokenize));
         }
       }
     }
@@ -65,14 +63,7 @@ function initAutoTag() {
 $(document).ready(function () {
   //Sidebar
   if ($('.stories-sidebar').length) {
-    $('.mobile-sidebar-trigger').on('click', function () {
-      $('.stories-sidebar').addClass('is-active');
-    });
-    $('.close-stories-sidebar').on('click', function () {
-      $(this).closest('.stories-sidebar').removeClass('is-active');
-    });
-
-    function handleMobileSidebar() {
+    var handleMobileSidebar = function handleMobileSidebar() {
       if (window.matchMedia("(max-width: 767px)").matches) {
         $('.stories-sidebar').removeClass('is-active');
       } else if (window.matchMedia("(max-width: 768px)").matches) {
@@ -80,8 +71,14 @@ $(document).ready(function () {
       } else {
         $('.stories-sidebar').addClass('is-active');
       }
-    }
+    };
 
+    $('.mobile-sidebar-trigger').on('click', function () {
+      $('.stories-sidebar').addClass('is-active');
+    });
+    $('.close-stories-sidebar').on('click', function () {
+      $(this).closest('.stories-sidebar').removeClass('is-active');
+    });
     handleMobileSidebar();
     $(window).on('resize', function () {
       handleMobileSidebar();
@@ -118,7 +115,7 @@ $(document).ready(function () {
           var url = URL.createObjectURL(blob);
           var video = document.createElement('video');
 
-          var timeupdate = function () {
+          var timeupdate = function timeupdate() {
             if (snapImage()) {
               video.removeEventListener('timeupdate', timeupdate);
               video.pause();
@@ -131,7 +128,7 @@ $(document).ready(function () {
             }
           });
 
-          var snapImage = function () {
+          var snapImage = function snapImage() {
             var canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
@@ -140,12 +137,7 @@ $(document).ready(function () {
             var success = image.length > 100000;
 
             if (success) {
-              var img = `
-                                <div id="video-preview-container" class="preview-image-container">
-                                    <button class="delete delete-preview-item"></button>
-                                    <img class="preview-image" src="${image}" alt="">
-                                </div>
-                            `;
+              var img = "\n                                <div id=\"video-preview-container\" class=\"preview-image-container\">\n                                    <button class=\"delete delete-preview-item\"></button>\n                                    <img class=\"preview-image\" src=\"" + image + "\" alt=\"\">\n                                </div>\n                            ";
               document.getElementById('video-upload-placeholder').classList.add('is-hidden');
               document.getElementById('preview').insertAdjacentHTML('beforeend', img);
               deletePreview();
@@ -179,12 +171,7 @@ $(document).ready(function () {
 
       if (file.type.match('image')) {
         fileReader.onload = function () {
-          var img = `
-                        <div id="image-preview-container" class="preview-image-container">
-                            <button class="delete delete-preview-item"></button>
-                            <img class="preview-image" src="${fileReader.result}" alt="">
-                        </div>
-                    `;
+          var img = "\n                        <div id=\"image-preview-container\" class=\"preview-image-container\">\n                            <button class=\"delete delete-preview-item\"></button>\n                            <img class=\"preview-image\" src=\"" + fileReader.result + "\" alt=\"\">\n                        </div>\n                    ";
           document.getElementById('image-upload-placeholder').classList.add('is-hidden');
           document.getElementById('image-preview').insertAdjacentHTML('beforeend', img);
           deletePreview();

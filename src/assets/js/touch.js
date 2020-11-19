@@ -1,15 +1,54 @@
+"use strict";
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && _typeof(Symbol.iterator) === "symbol") {
+    _typeof = function (_typeof2) {
+      function _typeof(_x) {
+        return _typeof2.apply(this, arguments);
+      }
+
+      _typeof.toString = function () {
+        return _typeof2.toString();
+      };
+
+      return _typeof;
+    }(function (obj) {
+      return typeof obj === "undefined" ? "undefined" : _typeof(obj);
+    });
+  } else {
+    _typeof = function (_typeof3) {
+      function _typeof(_x2) {
+        return _typeof3.apply(this, arguments);
+      }
+
+      _typeof.toString = function () {
+        return _typeof3.toString();
+      };
+
+      return _typeof;
+    }(function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+    });
+  }
+
+  return _typeof(obj);
+}
 /*! touch.js | Friendkit | 2019-2020 */
 
 /* ==========================================================================
 Touch functions
 ========================================================================== */
+
+
 $(document).ready(function () {
   "use strict";
 
   (function (factory) {
     if (typeof define === 'function' && define.amd) {
       define(['jquery', 'hammerjs'], factory);
-    } else if (typeof exports === 'object') {
+    } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object') {
       factory(require('jquery'), require('hammerjs'));
     } else {
       factory(jQuery, Hammer);

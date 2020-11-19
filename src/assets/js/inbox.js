@@ -1,8 +1,10 @@
+"use strict";
 /*! inbox.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Inbox UI functions
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict";
 
@@ -20,8 +22,8 @@ $(document).ready(function () {
       $(this).addClass('is-active');
     }); //Quill Editor init
 
-    let containers = document.querySelectorAll('.reply-textarea');
-    let editors = Array.from(containers).map(function (container) {
+    var containers = document.querySelectorAll('.reply-textarea');
+    var editors = Array.from(containers).map(function (container) {
       return new Quill(container, {
         modules: {
           toolbar: [[{

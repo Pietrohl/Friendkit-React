@@ -1,8 +1,10 @@
+"use strict";
 /*! autocompletes.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 All autocompletes that are used accross the project
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict"; //Friends autocomplete
 
@@ -14,7 +16,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /><img class=" + 'avatar-badge' + " src='" + item.badge + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.location + "</span></div></div> ";
         }
       },
@@ -25,27 +27,18 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the user name from the autocomplete
           var newRecipient = $('#users-autocpl').val(); //empty the input for next use
 
           $('#users-autocpl').val('');
-          html = `
-                        <div class="control tag-control">
-                            <div class="tags has-addons">
-                                <a class="tag is-link">${newRecipient}</a>
-                                <a class="tag is-delete is-inverted"></a>
-                            </div>
-                        </div>
-                    `;
-          summary = `
-                        <span class="tagged-friend"><small>&mdash; with</small> <a class="is-inverted" href="#">${newRecipient}</a>,</span>
-                    `; //Append tag template in list
+          html = "\n                        <div class=\"control tag-control\">\n                            <div class=\"tags has-addons\">\n                                <a class=\"tag is-link\">" + newRecipient + "</a>\n                                <a class=\"tag is-delete is-inverted\"></a>\n                            </div>\n                        </div>\n                    ";
+          summary = "\n                        <span class=\"tagged-friend\"><small>&mdash; with</small> <a class=\"is-inverted\" href=\"#\">" + newRecipient + "</a>,</span>\n                    "; //Append tag template in list
 
           $.when($('#tag-list').append(html)).done(function () {
             //Add the name to the tagged friends summary
@@ -80,7 +73,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /><img class=" + 'avatar-badge' + " src='" + item.badge + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.location + "</span></div></div> ";
         }
       },
@@ -91,27 +84,18 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the user name from the autocomplete
           var newTag = $('#share-friend-tags-autocpl').val(); //empty the input for next use
 
           $('#share-friend-tags-autocpl').val('');
-          html = `
-                        <div class="control is-spaced tag-control">
-                            <div class="tags has-addons">
-                                <a class="tag is-link">${newTag}</a>
-                                <a class="tag is-delete is-inverted"></a>
-                            </div>
-                        </div>
-                    `;
-          summary = `
-                        <span class="tagged-friend"><small>&mdash; with</small> <a class="is-inverted" href="#">${newTag}</a>,</span>
-                    `; //Append tag template in list
+          html = "\n                        <div class=\"control is-spaced tag-control\">\n                            <div class=\"tags has-addons\">\n                                <a class=\"tag is-link\">" + newTag + "</a>\n                                <a class=\"tag is-delete is-inverted\"></a>\n                            </div>\n                        </div>\n                    ";
+          summary = "\n                        <span class=\"tagged-friend\"><small>&mdash; with</small> <a class=\"is-inverted\" href=\"#\">" + newTag + "</a>,</span>\n                    "; //Append tag template in list
 
           $.when($('#share-modal-tag-list').append(html)).done(function () {
             //Make added tag removable
@@ -135,7 +119,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /><img class=" + 'avatar-badge' + " src='" + item.badge + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.location + "</span></div></div> ";
         }
       },
@@ -146,25 +130,18 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //
           var userId = $("#create-album-friends-autocpl").getSelectedItemData().id;
           var userAvatar = $("#create-album-friends-autocpl").getSelectedItemData().pic; //empty the input for next use
 
           $('#create-album-friends-autocpl').val('');
-          html = `
-                        <div class="tagged-user">
-                            <img src="${userAvatar}" alt=""  data-user-popover="${userId}">
-                            <div class="remove-tag">
-                                ${closeIcon}
-                            </div>
-                        </div>
-                    `; //Append tag template in list
+          html = "\n                        <div class=\"tagged-user\">\n                            <img src=\"" + userAvatar + "\" alt=\"\"  data-user-popover=\"" + userId + "\">\n                            <div class=\"remove-tag\">\n                                " + closeIcon + "\n                            </div>\n                        </div>\n                    "; //Append tag template in list
 
           $.when($('#album-tag-list').append(html)).done(function () {
             //Init user popovers
@@ -189,7 +166,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /><img class=" + 'avatar-badge' + " src='" + item.badge + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.location + "</span></div></div> ";
         }
       },
@@ -200,12 +177,12 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the user name from the autocomplete
           var newFriend = $('.simple-users-autocpl').val();
         }
@@ -223,7 +200,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /><img class=" + 'avatar-badge' + " src='" + item.country + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.topic + "</span></div><div class=" + 'right-content' + ">" + item.members + " members</div></div> ";
         }
       },
@@ -234,12 +211,12 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the group name from the autocomplete
           var newGroup = $('.simple-groups-autocpl').val();
         }
@@ -257,7 +234,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar is-squared' + " src='" + item.pic + "' /><img class=" + 'avatar-badge' + " src='" + item.country + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.address + "</span></div><div class=" + 'right-content' + ">" + item.visitors + " where there</div></div> ";
         }
       },
@@ -268,12 +245,12 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the location name from the autocomplete
           var newGroup = $('.simple-locations-autocpl').val();
         }
@@ -290,7 +267,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.desc + "</span></div><div class=" + 'next-icon' + "><i class=" + 'mdi mdi-chevron-right' + "></i></div></div> ";
         }
       },
@@ -301,12 +278,12 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the activity name from the autocomplete
           var newActivity = $('#activities-autocpl').val(); //empty the input for next use
 
@@ -357,7 +334,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper is-smaller' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "</div></div> ";
         }
       },
@@ -368,21 +345,19 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the mood item name from the autocomplete
           var newMood = $('#mood-autocpl').val(); //
 
           var emoji = $("#mood-autocpl").getSelectedItemData().pic; //empty the input for next use
 
           $('#mood-autocpl').val('');
-          html = `
-                        <span class="mood-display"><img src="${emoji}"><span>${newMood}</span></span>
-                    `;
+          html = "\n                        <span class=\"mood-display\"><img src=\"" + emoji + "\"><span>" + newMood + "</span></span>\n                    ";
 
           if ($('.mood-display').length) {
             $('.mood-display').remove();
@@ -412,7 +387,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper is-smaller' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "</div></div> ";
         }
       },
@@ -423,21 +398,19 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the drink name from the autocomplete
           var newDrink = $('#drinking-autocpl').val(); //
 
           var drinkIcon = $("#drinking-autocpl").getSelectedItemData().pic; //empty the input for next use
 
           $('#drinking-autocpl').val('');
-          html = `
-                        <span class="mood-display"><img src="${drinkIcon}"><span class="is-inverted""><span class="action-text">is drinking</span>${newDrink}</span></span>
-                    `;
+          html = "\n                        <span class=\"mood-display\"><img src=\"" + drinkIcon + "\"><span class=\"is-inverted\"\"><span class=\"action-text\">is drinking</span>" + newDrink + "</span></span>\n                    ";
 
           if ($('.mood-display').length) {
             $('.mood-display').remove();
@@ -467,7 +440,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper is-smaller' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "</div></div> ";
         }
       },
@@ -478,21 +451,19 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the drink name from the autocomplete
           var newEat = $('#eating-autocpl').val(); //
 
           var eatIcon = $("#eating-autocpl").getSelectedItemData().pic; //empty the input for next use
 
           $('#eating-autocpl').val('');
-          html = `
-                        <span class="mood-display"><img src="${eatIcon}"><span><span class="action-text">is eating</span>${newEat}</span></span>
-                    `;
+          html = "\n                        <span class=\"mood-display\"><img src=\"" + eatIcon + "\"><span><span class=\"action-text\">is eating</span>" + newEat + "</span></span>\n                    ";
 
           if ($('.mood-display').length) {
             $('.mood-display').remove();
@@ -522,7 +493,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span class=" + 'is-description' + ">" + item.desc + "</span></div></div> ";
         }
       },
@@ -533,21 +504,19 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the activity name from the autocomplete
           var newRead = $('#reading-autocpl').val(); //
 
           var readIcon = $("#drinking-autocpl").getSelectedItemData().pic; //empty the input for next use
 
           $('#reading-autocpl').val('');
-          html = `
-                        <span class="mood-display"><img src="${readIcon}"><span class="is-inverted""><span class="action-text">is reading</span>${newRead}</span></span>
-                    `;
+          html = "\n                        <span class=\"mood-display\"><img src=\"" + readIcon + "\"><span class=\"is-inverted\"\"><span class=\"action-text\">is reading</span>" + newRead + "</span></span>\n                    ";
 
           if ($('.mood-display').length) {
             $('.mood-display').remove();
@@ -578,7 +547,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span class=" + 'is-description' + ">" + item.desc + "</span></div></div> ";
         }
       },
@@ -589,21 +558,19 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the activity name from the autocomplete
           var newWatch = $('#watching-autocpl').val(); //
 
           var watchIcon = $("#watching-autocpl").getSelectedItemData().pic; //empty the input for next use
 
           $('#watching-autocpl').val('');
-          html = `
-                        <span class="mood-display"><img src="${watchIcon}"><span class="is-inverted""><span class="action-text">is watching</span>${newWatch}</span></span>
-                    `;
+          html = "\n                        <span class=\"mood-display\"><img src=\"" + watchIcon + "\"><span class=\"is-inverted\"\"><span class=\"action-text\">is watching</span>" + newWatch + "</span></span>\n                    ";
 
           if ($('.mood-display').length) {
             $('.mood-display').remove();
@@ -634,7 +601,7 @@ $(document).ready(function () {
       getValue: "name",
       template: {
         type: "custom",
-        method: function (value, item) {
+        method: function method(value, item) {
           return "<div class=" + 'template-wrapper' + "><div class=" + 'icon-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "</div></div> ";
         }
       },
@@ -645,21 +612,19 @@ $(document).ready(function () {
           type: "fade",
           //normal|slide|fade
           time: 400,
-          callback: function () {}
+          callback: function callback() {}
         },
         match: {
           enabled: true
         },
-        onChooseEvent: function () {
+        onChooseEvent: function onChooseEvent() {
           //Get the drink name from the autocomplete
           var newTravel = $('#travel-autocpl').val(); //
 
           var travelIcon = $("#travel-autocpl").getSelectedItemData().pic; //empty the input for next use
 
           $('#travel-autocpl').val('');
-          html = `
-                        <span class="mood-display"><img src="${travelIcon}"><span class="is-inverted""><span class="action-text">Travels to</span>${newTravel}</span></span>
-                    `;
+          html = "\n                        <span class=\"mood-display\"><img src=\"" + travelIcon + "\"><span class=\"is-inverted\"\"><span class=\"action-text\">Travels to</span>" + newTravel + "</span></span>\n                    ";
 
           if ($('.mood-display').length) {
             $('.mood-display').remove();

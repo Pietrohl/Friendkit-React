@@ -1,8 +1,10 @@
+"use strict";
 /*! profile.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Profile js file
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict"; //Highlight current profile menu item
 
@@ -142,9 +144,7 @@ $(document).ready(function () {
   }); //Cover image cropper
 
   if ($('#upload-cover').length) {
-    var coverSrc = '';
-
-    function readCoverFile(input) {
+    var readCoverFile = function readCoverFile(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -161,23 +161,9 @@ $(document).ready(function () {
       } else {
         swal("Sorry - you're browser doesn't support the FileReader API");
       }
-    }
+    };
 
-    var $coverCrop = $('#upload-cover').croppie({
-      enableExif: true,
-      url: 'assets/img/demo/placeholder.png',
-      viewport: {
-        width: 640,
-        height: 184,
-        type: 'square'
-      },
-      boundary: {
-        width: '100%',
-        height: 300
-      }
-    });
-
-    function popupCoverResult(result) {
+    var popupCoverResult = function popupCoverResult(result) {
       var html;
 
       if (result.html) {
@@ -192,8 +178,22 @@ $(document).ready(function () {
         $('#submit-cover-picture').removeClass('is-loading');
         $('#upload-crop-cover-modal').removeClass('is-active');
       }
-    }
+    };
 
+    var coverSrc = '';
+    var $coverCrop = $('#upload-cover').croppie({
+      enableExif: true,
+      url: 'assets/img/demo/placeholder.png',
+      viewport: {
+        width: 640,
+        height: 184,
+        type: 'square'
+      },
+      boundary: {
+        width: '100%',
+        height: 300
+      }
+    });
     $('#upload-cover-picture').on('change', function () {
       readCoverFile(this);
       $(this).closest('.modal').find('.cover-uploader-box, .upload-demo-wrap, .cover-reset').toggleClass('is-hidden');
@@ -223,9 +223,7 @@ $(document).ready(function () {
 
 
   if ($('#upload-profile').length) {
-    var imgSrc = '';
-
-    function readFile(input) {
+    var readFile = function readFile(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -242,8 +240,24 @@ $(document).ready(function () {
       } else {
         swal("Sorry - you're browser doesn't support the FileReader API");
       }
-    }
+    };
 
+    var popupResult = function popupResult(result) {
+      var html;
+
+      if (result.html) {
+        html = result.html;
+      }
+
+      if (result.src) {
+        html = '<img src="' + result.src + '" />';
+        $('.cover-bg .avatar .avatar-image, #user-avatar-minimal').attr('src', result.src);
+        $('#submit-profile-picture').removeClass('is-loading');
+        $('#upload-crop-profile-modal').removeClass('is-active');
+      }
+    };
+
+    var imgSrc = '';
     var $uploadCrop = $('#upload-profile').croppie({
       enableExif: true,
       url: 'assets/img/demo/placeholder.png',
@@ -257,22 +271,6 @@ $(document).ready(function () {
         height: 300
       }
     });
-
-    function popupResult(result) {
-      var html;
-
-      if (result.html) {
-        html = result.html;
-      }
-
-      if (result.src) {
-        html = '<img src="' + result.src + '" />';
-        $('.cover-bg .avatar .avatar-image, #user-avatar-minimal').attr('src', result.src);
-        $('#submit-profile-picture').removeClass('is-loading');
-        $('#upload-crop-profile-modal').removeClass('is-active');
-      }
-    }
-
     $('#upload-profile-picture').on('change', function () {
       readFile(this);
       $(this).closest('.modal').find('.profile-uploader-box, .upload-demo-wrap, .profile-reset').toggleClass('is-hidden');

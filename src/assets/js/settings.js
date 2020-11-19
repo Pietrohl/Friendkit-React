@@ -9,14 +9,7 @@ $(document).ready(function () {
   if ($('.settings-wrapper').length) {
     //Sidebar
     if ($('.settings-sidebar').length) {
-      $('.mobile-sidebar-trigger').on('click', function () {
-        $('.settings-sidebar').addClass('is-active');
-      });
-      $('.close-settings-sidebar').on('click', function () {
-        $(this).closest('.settings-sidebar').removeClass('is-active');
-      });
-
-      function handleMobileSidebar() {
+      var handleMobileSidebar = function handleMobileSidebar() {
         if (window.matchMedia("(max-width: 767px)").matches) {
           $('.settings-sidebar').removeClass('is-active');
         } else if (window.matchMedia("(max-width: 768px)").matches) {
@@ -24,8 +17,14 @@ $(document).ready(function () {
         } else {
           $('.settings-sidebar').addClass('is-active');
         }
-      }
+      };
 
+      $('.mobile-sidebar-trigger').on('click', function () {
+        $('.settings-sidebar').addClass('is-active');
+      });
+      $('.close-settings-sidebar').on('click', function () {
+        $(this).closest('.settings-sidebar').removeClass('is-active');
+      });
       handleMobileSidebar();
       $(window).on('resize', function () {
         handleMobileSidebar();
@@ -50,7 +49,7 @@ $(document).ready(function () {
         getValue: "name",
         template: {
           type: "custom",
-          method: function (value, item) {
+          method: function method(value, item) {
             return "<div class=" + 'template-wrapper' + "><div class=" + 'avatar-wrapper' + ">" + "<img class=" + 'autocpl-avatar' + " src='" + item.pic + "' /></div><div class=" + 'entry-text' + ">" + value + "<br><span>" + item.code + "</span></div></div> ";
           }
         },
@@ -61,12 +60,12 @@ $(document).ready(function () {
             type: "fade",
             //normal|slide|fade
             time: 400,
-            callback: function () {}
+            callback: function callback() {}
           },
           match: {
             enabled: true
           },
-          onChooseEvent: function () {
+          onChooseEvent: function onChooseEvent() {
             //Get the user name from the autocomplete
             var newRecipient = $('#country-autocpl').val(); //empty the input for next use
             //$('#country-autocpl').val('');

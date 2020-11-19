@@ -38,6 +38,7 @@
   "devDependencies": {
     "acorn": "^7.1.1",
     "ansi-colors": "^4.1.1",
+    "babel-preset-env": "^1.7.0",
     "braces": "^2.3.1",
     "csscomb": "^4.2.0",
     "del": "^5.0.0",

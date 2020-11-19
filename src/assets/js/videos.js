@@ -1,20 +1,15 @@
+"use strict";
 /*! videos.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Videos js file
 ========================================================================== */
+
 $(document).ready(function () {
   "use strict"; //Sidebar
 
   if ($('.videos-sidebar').length) {
-    $('.mobile-sidebar-trigger').on('click', function () {
-      $('.videos-sidebar').addClass('is-active');
-    });
-    $('.close-videos-sidebar').on('click', function () {
-      $(this).closest('.videos-sidebar').removeClass('is-active');
-    });
-
-    function handleMobileSidebar() {
+    var handleMobileSidebar = function handleMobileSidebar() {
       if (window.matchMedia("(max-width: 767px)").matches) {
         $('.videos-sidebar').removeClass('is-active');
       } else if (window.matchMedia("(max-width: 768px)").matches) {
@@ -22,8 +17,14 @@ $(document).ready(function () {
       } else {
         $('.videos-sidebar').addClass('is-active');
       }
-    }
+    };
 
+    $('.mobile-sidebar-trigger').on('click', function () {
+      $('.videos-sidebar').addClass('is-active');
+    });
+    $('.close-videos-sidebar').on('click', function () {
+      $(this).closest('.videos-sidebar').removeClass('is-active');
+    });
     handleMobileSidebar();
     $(window).on('resize', function () {
       handleMobileSidebar();
