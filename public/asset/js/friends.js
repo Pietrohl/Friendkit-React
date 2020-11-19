@@ -1,10 +1,10 @@
 "use strict";
+
 /*! friends.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Friends page js file
 ========================================================================== */
-
 $(document).ready(function () {
   "use strict";
 
@@ -13,17 +13,17 @@ $(document).ready(function () {
     var enableSearch = function enableSearch() {
       $('.friend-card').addClass('textFilter-target');
       $('.friend-card').find(' .friend-info h3,  .friend-info p').addClass('textFilter-match');
-    }; //Call loader
+    };
 
-
+    //Call loader
     var callLoader = function callLoader(t) {
       $('.subloader').addClass('is-active');
       setTimeout(function () {
         $('.subloader').removeClass('is-active');
       }, t);
-    }; //Hide loader
+    };
 
-
+    //Hide loader
     $('.subloader').removeClass('is-active'); //Init combo box
 
     initComboBox(); //Init image combo box

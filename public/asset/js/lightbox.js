@@ -1,10 +1,10 @@
 "use strict";
+
 /*! lightbox.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Fancybox functions
 ========================================================================== */
-
 $(document).ready(function () {
   "use strict"; //Change demo images
 

@@ -1,10 +1,10 @@
 "use strict";
+
 /*! autocompletes.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 All autocompletes that are used accross the project
 ========================================================================== */
-
 $(document).ready(function () {
   "use strict"; //Friends autocomplete
 

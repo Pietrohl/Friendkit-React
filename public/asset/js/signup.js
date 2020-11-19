@@ -1,10 +1,10 @@
 "use strict";
+
 /*! signup.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Signup Process JS
 ========================================================================== */
-
 Dropzone.autoDiscover = false;
 $(document).ready(function () {
   "use strict";

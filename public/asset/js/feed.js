@@ -1,10 +1,10 @@
 "use strict";
+
 /*! feed.js | Friendkit | © Css Ninja. 2019-2020 */
 
 /* ==========================================================================
 Feed page js file
 ========================================================================== */
-
 $(document).ready(function () {
   "use strict";
 
@@ -59,9 +59,9 @@ $(document).ready(function () {
         }, 800);
       });
     }; //Add a recommended page to favorites
+
+
     //Feed v1 left menu
-
-
     if ($('.feed-menu-v1').length) {
       $('.feed-menu-v1 .main-menu li.is-active').find('.submenu').slideDown();
       $('.feed-menu-v1 .main-menu li').on('click', function () {

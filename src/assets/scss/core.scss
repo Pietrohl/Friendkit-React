@@ -61,8 +61,8 @@ Core SCSS file
 
 @import "layout/layout-responsive";
 
-$slick-font-path: "/assets/fonts/";
-$slick-loader-path: "/assets/fonts/";
+$slick-font-path: "../fonts/";
+$slick-loader-path: "../fonts/";
 
-@import "../../../node_modules/slick-carousel/slick/slick.scss";
-@import "../../../node_modules/slick-carousel/slick/slick-theme.scss";
+// @import "../../../node_modules/slick-carousel/slick/slick.scss";
+// @import "../../../node_modules/slick-carousel/slick/slick-theme.scss";
