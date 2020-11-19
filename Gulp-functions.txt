@@ -1,0 +1,62 @@
+gulp dev
+[11:58:35] Using gulpfile ~\Documents\Projects\upwork_friendkit_react\friendkit-1.1.3\friendkit-1.1.3\gulpfile.js
+[11:58:35] Starting 'dev'...
+[11:58:35] Starting 'cleanDist'...
+---------------REMOVING OLD FILES FROM DIST---------------
+[11:58:36] Finished 'cleanDist' after 283 ms
+[11:58:36] Starting 'copyFont'...
+---------------COPYING FONTS INTO DIST FOLDER---------------
+[11:58:36] Finished 'copyFont' after 67 ms
+[11:58:36] Starting 'copyData'...
+---------------COPYING DATA INTO DIST FOLDER---------------
+[11:58:36] Finished 'copyData' after 58 ms
+[11:58:36] Starting 'jsVendor'...
+---------------COPY JAVASCRIPT VENDOR FILES INTO DIST---------------
+[11:58:36] Finished 'jsVendor' after 43 ms
+[11:58:36] Starting 'cssVendor'...
+---------------COPY CSS VENDOR FILES INTO DIST---------------
+[11:58:36] Finished 'cssVendor' after 35 ms
+[11:58:36] Starting 'copyImages'...
+---------------OPTIMIZING IMAGES---------------
+[11:58:37] Finished 'copyImages' after 735 ms
+[11:58:37] Starting 'compileHTML'...
+---------------COMPILING HTML WITH PANINI---------------  //Essa função vai ser substituida pelo React
+[11:58:38] Finished 'compileHTML' after 1.51 s
+[11:58:38] Starting 'concatPlugins'...
+---------------CONCATENATE JS PLUGINS--------------- 
+[11:58:38] Finished 'concatPlugins' after 170 ms
+[11:58:38] Starting 'concatCssPlugins'...
+---------------CONCATENATE CSS PLUGINS---------------
+[11:58:38] Finished 'concatCssPlugins' after 126 ms
+[11:58:38] Starting 'compileJS'...
+---------------COMPILE CUSTOM JS---------------
+[11:58:41] Finished 'compileJS' after 2.24 s
+[11:58:41] Starting 'resetPages'...
+---------------CLEARING PANINI CACHE---------------  //Essa função não será necessária
+[11:58:41] Finished 'resetPages' after 62 ms
+[11:58:41] Starting 'prettyHTML'...
+---------------HTML PRETTIFY---------------			//Essa função não será necessária
+[11:58:43] Finished 'prettyHTML' after 2.44 s
+[11:58:43] Starting 'compileSASS'...
+---------------COMPILING BULMA SASS---------------
+Browserslist: caniuse-lite is outdated. Please run next command `npm update`
+[11:58:45] Finished 'compileSASS' after 1.46 s
+[11:58:45] Starting 'compileSCSS'...
+---------------COMPILING SCSS---------------
+[11:58:47] Finished 'compileSCSS' after 2.61 s
+[11:58:47] Starting 'browserSyncInit'...
+---------------BROWSER SYNC---------------
+[11:58:47] Finished 'browserSyncInit' after 31 ms
+[11:58:47] Starting 'watchFiles'...
+[Browsersync] Access URLs:
+ --------------------------------------
+       Local: http://localhost:3000
+    External: http://192.168.15.44:3000    
+ -------------------------------------- 
+          UI: http://localhost:3001
+ UI External: http://localhost:3001
+ --------------------------------------
+[Browsersync] Serving files from: ./dist
+
+
+BEBEL E BROWSERSYNC SERÂO DELETADOS
