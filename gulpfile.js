@@ -7,6 +7,8 @@ const babel = require('gulp-babel');
 const nodepath = 'node_modules/';
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
+const sassLint = require('gulp-sass-lint');
+const jshint = require('gulp-jshint');
 
 
 
@@ -203,9 +205,6 @@ exports.linters = series(scssLint, jsLint);
 
 //SETUP
 exports.setup = series(setupBulma);
-
-
-
 
   // DEV
 exports.dev = series(concatPlugins, concatCssPlugins, compileJS,compileSASS, compileSCSS, watchFiles);
