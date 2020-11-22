@@ -1,11 +1,17 @@
 import React from 'react';
 import Login from './pages/login';
 import './App.sass';
-import '../src/assets/scss/core.scss'
+import FadeIn from 'react-fade-in';
+import '../src/assets/scss/core.scss';
+import '../src/assets/sass/bulma.sass';
+import BasicRoutes from './components/Router/index';
+
 
 function App() {
   return (
-      <Login />
+    <FadeIn>
+      <BasicRoutes />
+    </FadeIn>
   );
 }
 
