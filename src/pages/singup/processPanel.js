@@ -14,7 +14,7 @@ const FirstPanel = (props) => {
     isActive = "process-panel-wrap is-active";
 
     return (
-        <div id="signup-panel-1" className={props.stage == 0 ? isActive : isInactive}>
+        <div id="signup-panel-1" className={props.stage === 0 ? isActive : isInactive}>
             <div className="columns">
                 <div className="column is-4">
                     <div className="account-type">
@@ -58,7 +58,7 @@ const SecondPanel = (props) => {
     isActive = "process-panel-wrap is-active is-narrow";
 
     return (
-        <div id="signup-panel-2" className={props.stage == 1 ? isActive : isInactive}>
+        <div id="signup-panel-2" className={props.stage === 1 ? isActive : isInactive}>
             <div className="form-panel">
                 <div className="field">
                     <label>First Name</label>
@@ -95,13 +95,13 @@ const ThirdPanel = (props) => {
 
     return (
 
-        <div id="signup-panel-3" className={props.stage == 2 ? isActive : isInactive}>
+        <div id="signup-panel-3" className={props.stage === 2 ? isActive : isInactive}>
             <div className="form-panel">
                 <div className="photo-upload">
                     <div className="preview">
-                        <a className="upload-button">
+                        <button className="upload-button">
                             <Plus />
-                        </a>
+                        </button>
                         <img id="upload-preview" src="https://via.placeholder.com/150x150"
                             data-demo-src="assets/img/avatars/avatar-w.png" alt=""/>
                             <form id="profile-pic-dz" className="dropzone is-hidden" action="/"></form>
@@ -126,7 +126,7 @@ const FourthPanel = (props) => {
     isActive = "process-panel-wrap is-active is-narrow";
 
     return (
-            <div id="signup-panel-4" className={props.stage == 3 ? isActive : isInactive}>
+            <div id="signup-panel-4" className={props.stage === 3 ? isActive : isInactive}>
                 <div className="form-panel">
                     <div className="field">
                         <label>Password</label>
@@ -162,7 +162,7 @@ const FifthPanel = (props) => {
                 isInactive = "process-panel-wrap is-narrow";
     isActive = "process-panel-wrap is-active is-narrow";
     return (
-            <div id="signup-panel-5" className={props.stage == 4 ? isActive : isInactive}>
+            <div id="signup-panel-5" className={props.stage === 4 ? isActive : isInactive}>
                 <div className="form-panel">
                     <img className="success-image" src={mailbox} alt="" />
                     <div className="success-text">
@@ -191,8 +191,8 @@ const ProcessTitle = (props) => {
 
     return (
             <div className="process-title">
-                <h2 id="step-title-1" className={props.stage % 2 == 0 ? isActive : isInactive}>{title[props.stage]}</h2>
-                <h2 id="step-title-1" className={props.stage % 2 == 1 ? isActive : isInactive}>{title[props.stage]}</h2>
+                <h2 id="step-title-1" className={props.stage % 2 === 0 ? isActive : isInactive}>{title[props.stage]}</h2>
+                <h2 id="step-title-1" className={props.stage % 2 === 1 ? isActive : isInactive}>{title[props.stage]}</h2>
             </div>
     )
 }

@@ -69,7 +69,7 @@ export default class Login extends Component {
                                     </div>
                                     <div className="section forgot-password">
                                         <div className="has-text-centered">
-                                            <a href="#">Forgot password?</a>
+                                            <a href="/login">Forgot password?</a>
                                         </div>
                                     </div>
                                 </div>
