@@ -1,5 +1,4 @@
 import React from 'react';
-import Login from './pages/login';
 import './App.sass';
 import FadeIn from 'react-fade-in';
 import '../src/assets/scss/core.scss';
