@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import friendkitWhite from '../assets/img/logo/friendkit-white.svg';
 import FadeIn from 'react-fade-in';
+import { Check, Lock, User } from 'react-feather';
 
 
 export default class Login extends Component {
@@ -38,7 +39,7 @@ export default class Login extends Component {
                                     {/*Avatar*/}
                                     <div className="avatar">
                                         <div className="badge">
-                                            <i data-feather="check"></i>
+                                            <Check/>
                                         </div>
                                         <img src="https://placehold.it/128x128" data-demo-src="assets/img/avatars/jenna.png" alt="" />
                                     </div>
@@ -48,7 +49,7 @@ export default class Login extends Component {
                                             <div className="control">
                                                 <input className="input email-input" type="text" placeholder="jennadavis@gmail.com" />
                                                 <div className="input-icon">
-                                                    <i data-feather="user"></i>
+                                                    <User/>
                                                 </div>
                                             </div>
                                         </div>
@@ -56,7 +57,7 @@ export default class Login extends Component {
                                             <div className="control">
                                                 <input className="input password-input" type="password" placeholder="●●●●●●●" />
                                                 <div className="input-icon">
-                                                    <i data-feather="lock"></i>
+                                                    <Lock />
                                                 </div>
                                             </div>
                                         </div>

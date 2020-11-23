@@ -1,9 +1,10 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../assets/scss/core.scss';
-import { useOnTop } from '../../../Hooks/useOnTop';
 import { useViewport } from '../../../Hooks/useViewport'
-import logo from '../../../assets/img/logo/friendkit-bold.svg'
+import logoBold from '../../../assets/img/logo/friendkit-bold.svg'
+import logoWhite from '../../../assets/img/logo/friendkit-white.svg'
+import logo from '../../../assets/img/logo/friendkit.svg'
 
 const BasicNavbar = () => {
 
@@ -37,7 +38,7 @@ const BasicNavbar = () => {
             <div className="container is-fluid">
                 <div className="navbar-brand">
                     <Link to="/" className="navbar-item">
-                        <img className="logo" src={logo} alt="" />
+                        <img className="logo" src={logoBold} alt="" />
                     </Link>
                 </div>
                 <div className="navbar-menu">
@@ -72,6 +73,7 @@ const BasicNavbar = () => {
 
 const NavbarMobile = () => {
 const [navScroll, setNavScroll] = useState();
+const [navMenu, setNavMenu] = useState(false);
 
 const  navTop = "navbar mobile-navbar is-landing is-hidden-desktop no-shadow no-background";
 const  navScrolled = "navbar mobile-navbar is-landing is-hidden-desktop";
@@ -98,19 +100,19 @@ useLayoutEffect(() => {
         {/* <!-- Brand --> */}
         <div className="navbar-brand">
             <Link className="navbar-item" to="/">
-                <img className="dark-mobile-logo" src="assets/img/logo/friendkit.svg" alt="" />
-                <img className="light-mobile-logo" src="assets/img/logo/friendkit-white.svg" alt="" />
+                <img className="dark-mobile-logo" src={logo} alt="" />
+                <img className="light-mobile-logo" src={logoWhite} alt="" />
             </Link>
 
             {/* <!-- Mobile menu toggler icon --> */}
-            <div className="navbar-burger">
+            <div className={`navbar-burger ${navMenu? `is-active` : ""}`} onClick={()=> setNavMenu(!navMenu)}>
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
         {/* <!-- Navbar mobile menu --> */}
-        <div className="navbar-menu">
+        <div className={`navbar-menu ${navMenu? `is-active` : ""}`}>
             {/* <!-- Account --> */}
             <div className="navbar-item has-dropdown">
                 <div className="navbar-link">
