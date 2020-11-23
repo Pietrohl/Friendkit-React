@@ -1,7 +1,7 @@
 import Login from '../../pages/login';
 import Landing from '../../pages/landing/index';
 import Feed from '../../pages/feed';
-import Signup from '../../pages/singup';
+import Signup from '../../pages/singup/index';
 
 export const routes = [
   {
