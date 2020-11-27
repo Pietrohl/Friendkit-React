@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FakeAd } from '../../components/widget/fake_ad';
 import { RecomendedPages } from '../../components/widget/recommended_pages/index';
 import { WeatherWidget } from '../../components/widget/weather_widget/index';
@@ -7,16 +7,34 @@ import { Birthday } from '../../components/widget/birthday/index';
 import Stories from '../../components/widget/stories';
 import ComposeCard from './composeCard';
 import FeedPost from './feedPost';
+import FeedPost2 from './feedPost2';
 import { SuggestedFriends } from '../../components/widget/suggested_friends';
 import { NewJob } from '../../components/widget/new_job';
-import { MainNavbar } from '../../components/Navbar/MainNavbar'
+import { MainNavbar } from '../../components/Navbar/MainNavbar';
+import { ShareModal } from './modals/share';
+import Fancybox from './modals/fancybox';
+
 
 export default function Feed() {
     const [appOverlay, setAppOverlay] = useState(false);
+    const [videoModel, setVideoModel] = useState(false);
+    const [shareModal, setShareModal] = useState(false);
+    let [innerTextNode, setInnerTextNode] = useState();
+    const [fancyVisible, setFancyVisible]= useState(false);
 
-    return (
+
+    useEffect(() => {
+
+        console.log(`No Index share model ${shareModal ? 'true' : 'false'}`)
+
+
+    }, [shareModal])
+
+
+
+    return ( !fancyVisible? 
         <>
-        <div className={`app-overlay ${appOverlay? 'is-active' : ''}`}></div>
+            <div className={`app-overlay ${appOverlay ? 'is-active' : ''}`}></div>
             {/* Header */}
             <MainNavbar />
 
@@ -49,15 +67,37 @@ export default function Feed() {
 
                             <div class="column is-6">
 
-                                <ComposeCard  setAppOverlay={setAppOverlay}/>
+                                <ComposeCard
+                                    videoModel={videoModel}
+                                    setVideoModel={setVideoModel}
+                                    setAppOverlay={setAppOverlay}
+                                />
 
-                                <FeedPost />
 
-                                <FeedPost />
+                                <FeedPost
+                                    shareModal={shareModal}
+                                    setShareModal={setShareModal}
+                                    setInnerTextNode={setInnerTextNode}
+                                    innerTextNode={innerTextNode}
+                                    setAppOverlay={setAppOverlay}
+                                    setFancyVisible={setFancyVisible}
+                                />
 
-                                <FeedPost />
+                                <FeedPost2
+                                    shareModal={shareModal}
+                                    setShareModal={setShareModal}
+                                    setInnerTextNode={setInnerTextNode}
+                                    innerTextNode={innerTextNode}
+                                    setAppOverlay={setAppOverlay}
+                                />
 
-                                <FeedPost />
+                                <FeedPost
+                                    shareModal={shareModal}
+                                    setShareModal={setShareModal}
+                                    setInnerTextNode={setInnerTextNode}
+                                    innerTextNode={innerTextNode}
+                                    setAppOverlay={setAppOverlay}
+                                />
 
                                 {/* <!-- Load more posts --> */}
                                 <div class=" load-more-wrap narrow-top has-text-centered">
@@ -88,7 +128,12 @@ export default function Feed() {
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
+            <ShareModal setShareModal={setShareModal} shareModal={shareModal} innerTextNode={innerTextNode} />
         </>
+           : <Fancybox setFancyVisible={setFancyVisible} fancyVisible={fancyVisible}/>
     )
 } 

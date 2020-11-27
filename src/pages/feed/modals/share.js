@@ -1,19 +1,27 @@
+import { useLayoutEffect, useState } from "react";
+import { ChevronDown, Globe, Lock, User, Users, X } from "react-feather";
 
 
-export const ShareModal = () => {
+export const ShareModal = (props) => {
+    const [dropdown, setDropdown] = useState(false)
+    const { setShareModal, shareModal, innerTextNode } = props;
+
 
     return (
-        <div id="share-modal" class="modal share-modal is-xsmall has-light-bg">
+        <div
+            id="share-modal"
+            class={`modal share-modal is-xsmall has-light-bg ${shareModal ? 'is-active' : ''}`}>
+
             <div class="modal-background"></div>
             <div class="modal-content">
 
                 <div class="card">
                     <div class="card-heading">
-                        <div class="dropdown is-primary share-dropdown">
+                        <div class={`dropdown is-primary share-dropdown ${dropdown? 'is-active':''}`}>
                             <div>
-                                <div class="button">
+                                <div class="button" onClick={()=> setDropdown(!dropdown)}>
                                     <i class="mdi mdi-format-float-left"></i> <span>Share in your feed</span> <i
-                                        data-feather="chevron-down"></i>
+                                    ><ChevronDown /></i>
                                 </div>
                             </div>
                             <div class="dropdown-menu" role="menu">
@@ -69,9 +77,9 @@ export const ShareModal = () => {
                         </div>
 
                         {/* Close X button */}
-                        <div class="close-wrap">
+                        <div class="close-wrap" onClick={()=> setShareModal(false)}>
                             <span class="close-modal">
-                                <i data-feather="x"></i>
+                                <i><X/></i>
                             </span>
                         </div>
                     </div>
@@ -106,7 +114,7 @@ export const ShareModal = () => {
                                         <div>
                                             <div class="button page-selector">
                                                 <img src="https://via.placeholder.com/150x150" data-demo-src="assets/img/avatars/hanzo.svg" alt="" /> <span>Css Ninja</span> <i
-                                                    data-feather="chevron-down"></i>
+                                                ><ChevronDown /></i>
                                             </div>
                                         </div>
                                         <div class="dropdown-menu" role="menu">
@@ -144,148 +152,149 @@ export const ShareModal = () => {
                                 </div>
                             </div>
 
+
+                            <div class="alias">
+                                <img src="https://via.placeholder.com/150x150" data-demo-src="assets/img/avatars/jenna.png" alt="" />
+                            </div>
                         </div>
 
-                        <div class="alias">
-                            <img src="https://via.placeholder.com/150x150" data-demo-src="assets/img/avatars/jenna.png" alt="" />
+                        <div class="field is-autocomplete">
+                            <div id="share-to-private-message" class="control share-channel-control is-hidden">
+                                <input id="share-with-private-message" type="text"
+                                    class="input is-sm no-radius share-input simple-users-autocpl"
+                                    placeholder="Message a friend" />
+                                <div class="input-heading">
+                                    To :
+                        </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="field is-autocomplete">
-                    <div id="share-to-private-message" class="control share-channel-control is-hidden">
-                        <input id="share-with-private-message" type="text"
-                            class="input is-sm no-radius share-input simple-users-autocpl"
-                            placeholder="Message a friend" />
-                        <div class="input-heading">
-                            To :
+                    <div class="card-body">
+                        <div class="control">
+                            <textarea class="textarea comment-textarea" rows="1"
+                                placeholder="Say something about this ..."></textarea>
+                            <button class="emoji-button">
+                                <i data-feather="smile"></i>
+                            </button>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="control">
-                    <textarea class="textarea comment-textarea" rows="1"
-                        placeholder="Say something about this ..."></textarea>
-                    <button class="emoji-button">
-                        <i data-feather="smile"></i>
-                    </button>
-                </div>
-                <div class="shared-publication">
-                    <div class="featured-image">
-                        <img id="share-modal-image" src="https://via.placeholder.com/1600x900" data-demo-src="assets/img/demo/unsplash/1.jpg" alt="" />
-                    </div>
-                    <div class="publication-meta">
-                        <div class="inner-flex">
-                            <img id="share-modal-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/dan.jpg"
-                                data-user-popover="1" alt="" />
-                            <p id="share-modal-text">Yesterday with <a href="#">@Karen Miller</a> and <a href="#">@Marvin Stemperd</a> at the
+                        <div class="shared-publication">
+                            <div class="featured-image">
+                                <img id="share-modal-image" src="https://via.placeholder.com/1600x900" data-demo-src="assets/img/demo/unsplash/1.jpg" alt="" />
+                            </div>
+                            <div class="publication-meta">
+                                <div class="inner-flex">
+                                    <img id="share-modal-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/dan.jpg"
+                                        data-user-popover="1" alt="" />
+                                        {innerTextNode}
+                                    {/* <p id="share-modal-text">Yesterday with <a href="#">@Karen Miller</a> and <a href="#">@Marvin Stemperd</a> at the
                                 <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally fantastic! People were really
-                                excited about this one!</p>
-                        </div>
-                        <div class="publication-footer">
-                            <div class="stats">
-                                <div class="stat-block">
-                                    <i class="mdi mdi-earth"></i>
-                                    <small>Public</small>
+                                excited about this one!</p> */}
                                 </div>
-                                <div class="stat-block">
-                                    <i class="mdi mdi-eye"></i>
-                                    <small>163 views</small>
+                                <div class="publication-footer">
+                                    <div class="stats">
+                                        <div class="stat-block">
+                                            <i class="mdi mdi-earth"></i>
+                                            <small>Public</small>
+                                        </div>
+                                        <div class="stat-block">
+                                            <i class="mdi mdi-eye"></i>
+                                            <small>163 views</small>
+                                        </div>
+                                    </div>
+                                    <div class="publication-origin">
+                                        <small>Friendkit.io</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="publication-origin">
-                                <small>Friendkit.io</small>
-                            </div>
+
                         </div>
                     </div>
+                    <div class="bottom-share-inputs">
 
-                </div>
-            </div>
-            <div class="bottom-share-inputs">
-
-                <div id="action-place" class="field is-autocomplete is-dropup is-hidden">
-                    <div id="share-place" class="control share-bottom-channel-control">
-                        <input type="text" class="input is-sm no-radius share-input simple-locations-autocpl"
-                            placeholder="Where are you?" />
-                        <div class="input-heading">
-                            Location :
+                        <div id="action-place" class="field is-autocomplete is-dropup is-hidden">
+                            <div id="share-place" class="control share-bottom-channel-control">
+                                <input type="text" class="input is-sm no-radius share-input simple-locations-autocpl"
+                                    placeholder="Where are you?" />
+                                <div class="input-heading">
+                                    Location :
                         </div>
-                    </div>
-                </div>
-
-                <div id="action-tag" class="field is-autocomplete is-dropup is-hidden">
-                    <div id="share-tags" class="control share-bottom-channel-control">
-                        <input id="share-friend-tags-autocpl" type="text" class="input is-sm no-radius share-input"
-                            placeholder="Who are you with" />
-                        <div class="input-heading">
-                            Friends :
-                        </div>
-                    </div>
-                    <div id="share-modal-tag-list" class="tag-list no-margin"></div>
-                </div>
-
-            </div>
-            <div class="card-footer">
-                <div class="action-wrap">
-                    <div class="footer-action" data-target-action="tag">
-                        <i class="mdi mdi-account-plus"></i>
-                    </div>
-                    <div class="footer-action" data-target-action="place">
-                        <i class="mdi mdi-map-marker"></i>
-                    </div>
-                    <div class="footer-action dropdown is-spaced is-neutral dropdown-trigger is-up"
-                        data-target-action="permissions">
-                        <div>
-                            <i class="mdi mdi-lock-clock"></i>
-                        </div>
-                        <div class="dropdown-menu" role="menu">
-                            <div class="dropdown-content">
-                                <a href="#" class="dropdown-item">
-                                    <div class="media">
-                                        <i data-feather="globe"></i>
-                                        <div class="media-content">
-                                            <h3>Public</h3>
-                                            <small>Anyone can see this publication.</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item">
-                                    <div class="media">
-                                        <i data-feather="users"></i>
-                                        <div class="media-content">
-                                            <h3>Friends</h3>
-                                            <small>only friends can see this publication.</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item">
-                                    <div class="media">
-                                        <i data-feather="user"></i>
-                                        <div class="media-content">
-                                            <h3>Specific friends</h3>
-                                            <small>Don't show it to some friends.</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider" />
-                                <a class="dropdown-item">
-                                    <div class="media">
-                                        <i data-feather="lock"></i>
-                                        <div class="media-content">
-                                            <h3>Only me</h3>
-                                            <small>Only me can see this publication.</small>
-                                        </div>
-                                    </div>
-                                </a>
                             </div>
                         </div>
 
+                        <div id="action-tag" class="field is-autocomplete is-dropup is-hidden">
+                            <div id="share-tags" class="control share-bottom-channel-control">
+                                <input id="share-friend-tags-autocpl" type="text" class="input is-sm no-radius share-input"
+                                    placeholder="Who are you with" />
+                                <div class="input-heading">
+                                    Friends :
+                        </div>
+                            </div>
+                            <div id="share-modal-tag-list" class="tag-list no-margin"></div>
+                        </div>
+
                     </div>
-                </div>
-                <div class="button-wrap">
-                    <button type="button" class="button is-solid dark-grey-button close-modal">Cancel</button>
-                    <button type="button" class="button is-solid primary-button close-modal">Publish</button>
+                    <div class="card-footer">
+                        <div class="action-wrap">
+                            <div class="footer-action" data-target-action="tag">
+                                <i class="mdi mdi-account-plus"></i>
+                            </div>
+                            <div class="footer-action" data-target-action="place">
+                                <i class="mdi mdi-map-marker"></i>
+                            </div>
+                            <div class="footer-action dropdown is-spaced is-neutral dropdown-trigger is-up"
+                                data-target-action="permissions">
+                                <div>
+                                    <i class="mdi mdi-lock-clock"></i>
+                                </div>
+                                <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item">
+                                            <div class="media">
+                                                <i><Globe/></i>
+                                                <div class="media-content">
+                                                    <h3>Public</h3>
+                                                    <small>Anyone can see this publication.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <div class="media">
+                                                <i><Users/></i>
+                                                <div class="media-content">
+                                                    <h3>Friends</h3>
+                                                    <small>only friends can see this publication.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <div class="media">
+                                                <i><User/></i>
+                                                <div class="media-content">
+                                                    <h3>Specific friends</h3>
+                                                    <small>Don't show it to some friends.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <hr class="dropdown-divider" />
+                                        <a class="dropdown-item">
+                                            <div class="media">
+                                                <i><Lock/></i>
+                                                <div class="media-content">
+                                                    <h3>Only me</h3>
+                                                    <small>Only me can see this publication.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="button-wrap">
+                            <button type="button" class="button is-solid dark-grey-button close-modal" onClick={()=> setShareModal(false)}>Cancel</button>
+                            <button type="button" class="button is-solid primary-button close-modal" onClick={()=> setShareModal(false)}>Publish</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     MoreVertical,
     Video,
@@ -19,15 +19,22 @@ import {
     Camera,
     Tag,
     Edit2,
-    Activity,
     ChevronRight
 } from 'react-feather';
 import emoji1 from '../../assets/img/icons/emoji/emoji-1.svg'
-import activitiesAutoComp from '../../data/api/activities/activity-autocpl.json'
+import activities from '../../data/api/activities/activity-autocpl.json'
+import mood from '../../data/api/activities/mood/mood-autocpl.json'
+import $ from 'jquery';
+import { VideoHelpModal, VideoModal } from './modals/videos';
+import { ShareModal } from './modals/share';
 
 function ComposeCard(props) {
     const [isActive, setIsActive] = useState(false);
     const [extended, setExtended] = useState(false);
+    const [showFriends, setshowFriends] = useState(false);
+    const [friends1, setFriends1] = useState(false);
+    const [friends2, setFriends2] = useState(false);
+    const {videoModel, setVideoModel} = props;
 
     // tag: 1 , Activity: 2, Feels: 3, Drinking: 4, Eating: 5,  Reading: 6, Watching: 7,  Travelling: 8,
     // Location: 9, Link: 10, Gif: 11
@@ -41,6 +48,8 @@ function ComposeCard(props) {
     }
     const closeModal = () => {
         console.log('close')
+        setAutoComp(0);
+        setshowFriends(false);
         setExtended(false);
         setIsActive(false);
         props.setAppOverlay(false);
@@ -48,8 +57,34 @@ function ComposeCard(props) {
 
 
 
+    // AUTOCOMPLETE NOT WORKING IN REACT
+    function openActivitiesDrop() {
+        var e = $.Event("keyup", { keyCode: 65, which: 65 });
+        $("#activities-autocpl").focus();
+        $("#activities-autocpl").attr('value', '');
+        $("#activities-autocpl").triggerHandler(e);
+    }
+
+    useEffect(() => {
+
+        function activitiesAutoComp() {
+            $('.app-overlay').addClass('is-active');
+            $('.is-new-content').addClass('is-highlighted'); //$('.compose-options').toggleClass('is-hidden');
+
+            $('.is-suboption').addClass('is-hidden');
+            $('#activities-suboption').removeClass('is-hidden'); //Open autocomplete dropdown
+
+            openActivitiesDrop();
+        }
+
+
+        window.addEventListener('load', activitiesAutoComp)
+        return window.removeEventListener('load', activitiesAutoComp)
+    })
+
+
     return (
-        <div id="compose-card" onFocus={openModal} className={`card is-new-content ${isActive ? 'is-highlighted' : ''}`}>
+        <div id="compose-card" onFocus={openModal} className={`card is-new-content ${isActive ? 'is-highlighted' : ''}`} style={{ overflow: "visible" }}>
 
             <div className="tabs-wrapper" >
                 <div className="tabs is-boxed is-fullwidth" >
@@ -66,7 +101,7 @@ function ComposeCard(props) {
                                 <span>Albums</span>
                             </a>
                         </li>
-                        <li onClick={openModal}>
+                        <li onClick={() => setVideoModel(true)}>
                             <a className="modal-trigger" data-modal="videos-help-modal">
                                 <span className="icon is-small"><Video /></span>
                                 <span>Video</span>
@@ -118,33 +153,10 @@ function ComposeCard(props) {
                         {/* Activities autocomplete */}
                         <div id="activities-suboption" className={`is-autocomplete is-suboption ${autoComp === 2 ? '' : 'is-hidden'}`}>
                             <div id="activities-autocpl-wrapper" className="control has-margin">
-                                <input id="activities-autocpl" name="activities-autocpl" list="activities-autocpl" type="text" className="input" placeholder="What are you doing right now?" />
+                                <input id="activities-autocpl" type="text" className="input" placeholder="What are you doing right now?" />
                                 <div className="icon">
                                     <Search />
                                 </div>
-                                <datalist id="activities-autocpl">
-                                    <ul>
-                                        {activitiesAutoComp.map(activity => (
-                                            <option><li>
-                                                <div className="eac-item">
-                                                    <div className="tamplate-wrapper">
-                                                        <div className="avatar-wrapper">
-                                                            <img className='autocomplete-avatar' src={activity.pic} />
-                                                        </div>
-                                                        <div className='entry-text'>
-                                                            "{activity.name}"
-                                                    <br />
-                                                            <span>{activity.desc}</span>
-                                                        </div>
-                                                        <div>
-                                                            <ChevronRight/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li></option>
-                                        ))}
-                                    </ul>
-                                </datalist>
                                 <div className="close-icon is-main">
                                     <X />
                                 </div>
@@ -158,6 +170,27 @@ function ComposeCard(props) {
                                     <div className="input-block">
                                         Feels
                                     </div>
+                                    <datalist id="mood-autocpl">
+                                        {mood.map(mood => (
+                                            <option>
+                                                <div className="eac-item">
+                                                    <div className="tamplate-wrapper">
+                                                        <div className="avatar-wrapper">
+                                                            <img className='autocomplete-avatar' src={mood.pic} />
+                                                        </div>
+                                                        <div className='entry-text'>
+                                                            "{mood.name}"
+                                                    <br />
+                                                            <span>{mood.desc}</span>
+                                                        </div>
+                                                        <div>
+                                                            <ChevronRight />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </option>
+                                        ))}
+                                    </datalist>
                                     <div className="close-icon is-subactivity">
                                         <X />
                                     </div>
@@ -167,7 +200,7 @@ function ComposeCard(props) {
                             {/* Drinking Auto  */}
                             <div id="drinking-autocpl-wrapper" className={`is-autocomplete is-suboption ${autoComp === 4 ? '' : 'is-hidden'}`}>
                                 <div className="control has-margin">
-                                    <input id="drinking-autocpl" type="text" className="input is-subactivity" placeholder="What are you drinking?" />
+                                    <input id="drinking-autocpl" className="input is-subactivity" placeholder="What are you drinking?" />
                                     <div className="input-block">
                                         Drinks
                                     </div>
@@ -310,7 +343,7 @@ function ComposeCard(props) {
 
                             <div className="column is-6 is-narrower" onClick={() => setAutoComp(2)}>
                                 <div id="extended-show-activities" className="compose-option is-centered">
-                                    <img src="assets/img/icons/emoji/emoji-1.svg" alt="" />
+                                    <img src={emoji1} alt="" />
                                     <span>Mood/Activity</span>
                                 </div>
                             </div>
@@ -370,11 +403,11 @@ function ComposeCard(props) {
                     <div className="hidden-options">
                         <div className="target-channels">
 
-                            <div className="channel">
-                                <div className="round-checkbox is-small">
+                            <label className="channel" htmlFor="checkbox-1">
+                                <div className="round-checkbox is-small" >
                                     <div>
-                                        <input type="checkbox" id="checkbox-1" checked />
-                                        <label for="checkbox-1"></label>
+                                        <input type="checkbox" id="checkbox-1" />
+                                        <label htmlfor="checkbox-1"></label>
                                     </div>
                                 </div>
                                 <div className="channel-icon">
@@ -382,9 +415,9 @@ function ComposeCard(props) {
                                 </div>
                                 <div className="channel-name">Activity Feed</div>
 
-                                <div className="dropdown is-spaced is-modern is-right is-neutral dropdown-trigger">
+                                <div className={`dropdown is-spaced is-modern is-right is-neutral dropdown-trigger ${friends1 ? 'is-active' : ''}`} onBlur={() => setFriends1(false)}>
                                     <div>
-                                        <button className="button" aria-haspopup="true">
+                                        <button className="button" aria-haspopup="true" onClick={() => setFriends1(true)}>
                                             <Smile className="main-icon" />
                                             <span>Friends</span>
                                             <ChevronDown className="caret" />
@@ -432,13 +465,13 @@ function ComposeCard(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </label>
 
-                            <div className="channel">
+                            <label htmlFor="checkbox-2" className="channel">
                                 <div className="round-checkbox is-small">
                                     <div>
                                         <input type="checkbox" id="checkbox-2" />
-                                        <label for="checkbox-2"></label>
+                                        <label htmlFor="checkbox-2"></label>
                                     </div>
                                 </div>
                                 <div className="story-icon">
@@ -449,9 +482,9 @@ function ComposeCard(props) {
 
                                 <div className="channel-name">My Story</div>
 
-                                <div className="dropdown is-spaced is-modern is-right is-neutral dropdown-trigger">
+                                <div className={`dropdown is-spaced is-modern is-right is-neutral dropdown-trigger ${friends2 ? 'is-active' : ''}`} onBlur={() => setFriends2(false)}>
                                     <div>
-                                        <button className="button" aria-haspopup="true">
+                                        <button className="button" aria-haspopup="true" onClick={() => setFriends2(true)}>
                                             <Smile className="main-icon" />
                                             <span>Friends</span>
                                             <ChevronDown className="caret" />
@@ -489,11 +522,11 @@ function ComposeCard(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </label>
                         </div>
 
 
-                        <div className="friends-list is-hidden">
+                        <div className={`friends-list ${showFriends ? '' : 'is-hidden'}`}>
                             <div className="list-header">
                                 <span>Send in a message</span>
                                 <div className="actions">
@@ -518,7 +551,7 @@ function ComposeCard(props) {
                                     <div className="round-checkbox is-small">
                                         <div>
                                             <input type="checkbox" id="checkbox-3" />
-                                            <label for="checkbox-3"></label>
+                                            <label htmlFor="checkbox-3"></label>
                                         </div>
                                     </div>
                                     <img className="friend-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/dan.jpg" alt="" />
@@ -529,7 +562,7 @@ function ComposeCard(props) {
                                     <div className="round-checkbox is-small">
                                         <div>
                                             <input type="checkbox" id="checkbox-4" />
-                                            <label for="checkbox-4"></label>
+                                            <label htmlFor="checkbox-4"></label>
                                         </div>
                                     </div>
                                     <img className="friend-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/daniel.jpg" alt="" />
@@ -540,7 +573,7 @@ function ComposeCard(props) {
                                     <div className="round-checkbox is-small">
                                         <div>
                                             <input type="checkbox" id="checkbox-5" />
-                                            <label for="checkbox-5"></label>
+                                            <label htmlFor="checkbox-5"></label>
                                         </div>
                                     </div>
                                     <img className="friend-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/stella.jpg" alt="" />
@@ -551,7 +584,7 @@ function ComposeCard(props) {
                                     <div className="round-checkbox is-small">
                                         <div>
                                             <input type="checkbox" id="checkbox-6" />
-                                            <label for="checkbox-6"></label>
+                                            <label htmlFor="checkbox-6"></label>
                                         </div>
                                     </div>
                                     <img className="friend-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/david.jpg" alt="" />
@@ -562,7 +595,7 @@ function ComposeCard(props) {
                                     <div className="round-checkbox is-small">
                                         <div>
                                             <input type="checkbox" id="checkbox-7" />
-                                            <label for="checkbox-7"></label>
+                                            <label htmlFor="checkbox-7"></label>
                                         </div>
                                     </div>
                                     <img className="friend-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/nelly.png" alt="" />
@@ -574,7 +607,7 @@ function ComposeCard(props) {
 
                     <div className="more-wrap">
 
-                        <button id="show-compose-friends" type="button" className="button is-more" aria-haspopup="true">
+                        <button id="show-compose-friends" type="button" className="button is-more" aria-haspopup="true" onClick={() => setshowFriends(true)}>
                             <MoreVertical />
                             <span>View More</span>
                         </button>
@@ -585,7 +618,12 @@ function ComposeCard(props) {
                     </div>
                 </div>
             </div>
+            <VideoModal isActive={videoModel} setIsActive={setVideoModel} />
+
         </div>
+
+
+
     );
 }
 export default ComposeCard;
