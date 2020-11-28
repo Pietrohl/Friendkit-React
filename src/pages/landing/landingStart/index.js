@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import bulmaSVG from '../../../assets/img/icons/logos/bulma.svg'
 import gulpSVG from '../../../assets/img/icons/logos/gulp.svg'
-import sassSVG from '../../../assets/img/icons/logos/sass.svg'
+import sassSVG from '../../../assets/img/icons/logos/html5.svg'
 import html5SVG from '../../../assets/img/icons/logos/html5.svg'
 import friendkitFeed from '../../../assets/img/screens/friendkit-feed.png'
 import sr from '../../../Hooks/ScrollReveal';

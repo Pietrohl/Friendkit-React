@@ -1,40 +1,16 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
 import {
     Link2,
     MessageCircle,
     Heart
 } from 'react-feather';
-import { BrowserRouter } from 'react-router-dom';
-import { ActionButton } from '../../components/ActionButtons/ActionButton';
-import { ShareModal } from './modals/share';
 
 
 
 
 
-const FeedPost = (props) => {
-    const { shareModal, setShareModal, setInnerTextNode, setFancyVisible } = props;
-    const innerText = () => (
-        <p>Yesterday with
-            <a href="#">@Karen Miller</a> and
-            <a href="#">@Marvin Stemperd</a> at the
-            <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally fantastic! People were really excited about this one!
-        </p>
-    );
 
-    const handleShare = (prop) => {
-        setInnerTextNode(innerText)
-        setShareModal(prop)
-    }
-
-
-    useEffect(() => {
-
-        setInnerTextNode(innerText)
-    }, [shareModal])
-
-
-
+const FeedPost = () => {
+    // < !--POST #1 -- >
     return (
         <div id="feed-post-1" class="card is-post">
             {/* <!-- Main wrap --> */}
@@ -44,7 +20,7 @@ const FeedPost = (props) => {
                     {/* <!-- User meta --> */}
                     <div class="user-block">
                         <div class="image">
-                            <img src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/dan.jpg" alt="" />
+                            <img src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/dan.jpg" data-user-popover="1" alt="" />
                         </div>
                         <div class="user-info">
                             <a href="#">Dan Walker</a>
@@ -59,17 +35,19 @@ const FeedPost = (props) => {
                 {/* <!-- Post body --> */}
                 <div class="card-body">
                     {/* <!-- Post body text --> */}
-                    <div class="post-text" id="post-text">
-                        {innerText()}
+                    <div class="post-text">
+                        <p>Yesterday with
+                        <a href="#">@Karen Miller</a> and
+                        <a href="#">@Marvin Stemperd</a> at the
+                        <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally fantastic! People were really excited about this one!</p>
                     </div>
                     {/* <!-- Featured image --> */}
                     <div class="post-image">
-                        <div onClick={()=> setFancyVisible(true)}  href="javascript:void(0);">
+                        <a data-fancybox="post1" data-lightbox-type="comments" data-thumb="assets/img/demo/unsplash/1.jpg" href="https://via.placeholder.com/1600x900" data-demo-href="assets/img/demo/unsplash/1.jpg">
                             <img src="https://via.placeholder.com/1600x900" data-demo-src="assets/img/demo/unsplash/1.jpg" alt="" />
-                        </div>
+                        </a>
                         {/* <!-- Action buttons --> */}
 
-                        <ActionButton shareModal={shareModal} setShareModal={handleShare} />
 
 
                     </div>
@@ -111,10 +89,8 @@ const FeedPost = (props) => {
                 </div>
                 {/* <!-- /Post footer --> */}
             </div>
-
         </div>
-    )
-
+    );
 
 };
 
