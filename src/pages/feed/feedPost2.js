@@ -105,15 +105,15 @@ const FeedPost2 = (props) => {
                     {/* <!-- Post statistics --> */}
                     <div className="social-count">
                         <div className="likes-count">
-                            <i data-feather="heart"></i>
+                            <Heart/>
                             <span>2</span>
                         </div>
                         <div className="shares-count">
-                            <i data-feather="link-2"></i>
+                            <Link2/>
                             <span>0</span>
                         </div>
                         <div className="comments-count">
-                            <i data-feather="message-circle"></i>
+                            <MessageCircle/>
                             <span>2</span>
                         </div>
                     </div>
